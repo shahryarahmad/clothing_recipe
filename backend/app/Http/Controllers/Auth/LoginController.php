@@ -8,9 +8,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-
+use App\Traits\ApiResponses;
 class LoginController extends Controller
 {
+    use ApiResponses;
     /**
      * Login Method.
      *
@@ -24,10 +25,7 @@ class LoginController extends Controller
             // $request->session()->regenerate();
             $user = User::where('email', $request->email)->first();
 
-            return response()->json([
-                'message' => 'Login successful',
-                "user" => $user
-            ], 200);
+            return $this->ok('Login Successfull', $user);
         }
 
         throw ValidationException::withMessages([
