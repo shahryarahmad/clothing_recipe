@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('recipies', function (Blueprint $table) {
             $table->id();
+            $table->string('lot_number');
             $table->string('name');
             $table->integer('qty');
-            $table->integer('unit');
+            $table->unsignedBigInteger('unit');
+            $table->foreign('unit')->references('id')->on('units')->onDelete('cascade');
             $table->float('weight_per_meter');
-            $table->string('quality');
-            $table->text('description');
-            $table->text('chemicals');
+            $table->string('quality')->nullable();
+            $table->text('description')->nullable();
             $table->text('processing')->nullable();
             $table->timestamps();
         });

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Chemicals extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description'
+    ];
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipies::class);
+    }
 }
